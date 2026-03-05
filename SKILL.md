@@ -1,7 +1,6 @@
 ---
 name: akshare-query
 description: 查询金融市场数据，包括A股行情、基金、宏观经济指标、期货、外汇、指数和财经新闻。当用户询问股票价格、基金净值、GDP/CPI等经济数据、汇率、期货价格或财经新闻时使用此技能。
-allowed-tools: Bash(python:*)
 ---
 
 # 金融数据查询技能 (akshare-query)
