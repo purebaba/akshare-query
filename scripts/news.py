@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """新闻数据查询工具 - 个股新闻资讯与公告"""
 
+from lib.formatter import to_markdown
+import akshare as ak
+import argparse
+from curl_cffi import requests
+import pandas as pd
 import sys
 import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-
-import pandas as pd
-from curl_cffi import requests
-import argparse
-import akshare as ak
-from lib.formatter import to_markdown
 
 
 def fetch_stock_notices(symbol: str, page_size: int = 10, page_index: int = 1):
@@ -72,7 +71,8 @@ def fetch_stock_notices(symbol: str, page_size: int = 10, page_index: int = 1):
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
     }
 
-    response = requests.get(url, params=params, headers=headers, timeout=30, impersonate="chrome120")
+    response = requests.get(
+        url, params=params, headers=headers, timeout=30, impersonate="chrome120")
     response.raise_for_status()
 
     # 解析 JSONP 响应
@@ -84,7 +84,8 @@ def fetch_stock_notices(symbol: str, page_size: int = 10, page_index: int = 1):
     notices = []
     if "result" in data_json and "noticeWeb" in data_json["result"]:
         for item in data_json["result"]["noticeWeb"]:
-            title = item.get("title", "").replace('<em class="red">', '').replace('</em>', '')
+            title = item.get("title", "").replace(
+                '<em class="red">', '').replace('</em>', '')
             # 从 title 中提取股票名称（格式："股票名称:公告标题"）
             name = ""
             if ":" in title:
