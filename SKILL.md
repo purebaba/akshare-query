@@ -196,14 +196,21 @@ python {baseDir}/scripts/futures.py inventory --symbol 铜 [--limit 50]
 
 ### 7. 新闻数据 (news.py)
 
-查询个股相关新闻资讯。
+查询个股相关新闻资讯和公告信息。
 
+**个股新闻**：
 ```bash
-python {baseDir}/scripts/news.py --symbol 000001 [--limit 10]
+python {baseDir}/scripts/news.py --symbol 000001 --type news [--limit 10]
+```
+
+**个股公告**：
+```bash
+python {baseDir}/scripts/news.py --symbol 000001 --type notice [--limit 10]
 ```
 
 参数说明：
-- `--symbol`: 股票代码
+- `--symbol`: 股票代码，如 000001、600519
+- `--type`: 查询类型，`news`(新闻，默认) 或 `notice`(公告)
 - `--limit`: 返回条数，默认 10
 
 ## 注意事项
